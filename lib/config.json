@@ -1,0 +1,7 @@
+{
+    "namespace": "Bot",
+    "url": "https:\/\/github.com\/ashur\/tinyheavens",
+    "version": "0.1.0",
+    "data-dir": "\/var\/opt\/tinyheavens",
+    "php-min": "5.5"
+}

@@ -1,0 +1,12 @@
+[submodule "vendor/cranberry/cli"]
+	path = vendor/cranberry/cli
+	url = https://github.com/cranberry/cli.git
+[submodule "vendor/cranberry/bot"]
+	path = vendor/cranberry/bot
+	url = https://github.com/cranberry/bot.git
+[submodule "vendor/cranberry/pixel"]
+	path = vendor/cranberry/pixel
+	url = https://github.com/cranberry/pixel.git
+[submodule "vendor/spyc"]
+	path = vendor/spyc
+	url = https://github.com/mustangostang/spyc.git
