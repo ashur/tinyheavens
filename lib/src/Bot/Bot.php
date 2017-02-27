@@ -65,7 +65,7 @@ class Bot
 		 */
 		$palettes = [];
 
- 		$palettesURL = 'http://cabrera-bots.s3.amazonaws.com/tinyheavens/palettes.yml';
+		$palettesURL = 'https://cabrera-bots.s3.amazonaws.com/tinyheavens/palettes.yml';
  		$palettesYAML = file_get_contents( $palettesURL );
  		$palettesData = Spyc::YAMLLoadString( $palettesYAML );
 
