@@ -139,7 +139,7 @@ class Bot
 		}
 		catch( \Exception $e )
 		{
-			$graticuleColor = Palette::brightness( $canvasColor, 10 );
+			$graticuleColor = Palette::brightness( $canvasColor, 5 );
 		}
 
 		for( $lat = 1; $lat <= $latLineCount; $lat++ )
