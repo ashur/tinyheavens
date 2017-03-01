@@ -24,7 +24,7 @@ $command = new Command\Command( 'palette', 'Update palettes from remote source',
 
 	try
 	{
-		$palettesURL = 'https://cabrera-bots.s3.amazonaws.com/tinyheavens/palettes-private.yml';
+		$palettesURL = 'https://cabrera-bots.s3.amazonaws.com/tinyheavens/palettes.yml';
 		$request = new HTTP\Request( $palettesURL );
 		$response = HTTP\HTTP::get( $request );
 	}
