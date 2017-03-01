@@ -36,8 +36,11 @@ $app->registerCommandObject( 'twitter', $twitter );
 /*
  * Slack
  */
-$slack = new Slack\Slack();
-$app->registerCommandObject( 'slack', $slack );
+$slackMessage = new Slack\Message();
+$slackMessage->setUsername( $config->getValue( 'slack', 'name' ) );
+$slackMessage->setEmoji( $config->getValue( 'slack', 'emoji' ) );
+
+$app->registerCommandObject( 'slackMessage', $slackMessage );
 
 /*
  * Bot

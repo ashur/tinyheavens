@@ -10,6 +10,15 @@ use Cranberry\CLI\Command;
  */
 $command = new Command\Command( 'tweet', 'Post to Twitter', function()
 {
+	/*
+	 * Plan for a problem
+	 */
+	$slackWebhook = $this->config->getValue( 'slack', 'webhook' );
+	$slackAttachment = new Slack\Attachment( 'Post to Twitter' );
+
+	/*
+	 * Attempt to tweet
+	 */
 	$tweet = $this->bot->getTweet();
 
 	try
@@ -18,27 +27,12 @@ $command = new Command\Command( 'tweet', 'Post to Twitter', function()
 	}
 	catch( Exception $e )
 	{
-		/* Slack */
-		$slackWebhook = $this->config->getValue( 'slack', 'webhook' );
-
-		if( $slackWebhook != null )
-		{
-			$slackAttachment = new Slack\Attachment( "Post to Twitter" );
-			$slackAttachment->setColor( 'danger' );
-			$slackAttachment->addField( 'Status', 'Failed', true );
-			$slackAttachment->addField( 'Message', $e->getMessage(), true );
-
-			$slackMessage = new Slack\Message();
-			$slackMessage->setUsername( $this->config->getValue( 'slack', 'name' ) );
-			$slackMessage->setEmoji( $this->config->getValue( 'slack', 'emoji' ) );
-			$slackMessage->addAttachment( $slackAttachment );
-
-			$this->slack->postMessage( $slackWebhook, $slackMessage );
-		}
-
 		$this->bot->tweetDidFail();
 
-		throw new Command\CommandInvokedException( "Twitter said: '" . $e->getMessage() . "'", 1 );
+		$slackAttachment->setColor( 'danger' );
+		$slackAttachment->addField( 'Code', $e->getCode(), true );
+
+		throw new Bot\Exception( $e->getMessage(), 1, $slackWebhook, $this->slackMessage, $slackAttachment );
 	}
 
 	$this->bot->tweetDidSucceed();
