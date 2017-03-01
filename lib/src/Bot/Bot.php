@@ -20,6 +20,11 @@ class Bot
 	protected $brushes=[];
 
 	/**
+	 * @var	Cranberry\Core\File\Directory
+	 */
+	protected $dataDirectory;
+
+	/**
 	 * @var	Cranberry\Bot\History\History
 	 */
 	protected $history;
@@ -47,6 +52,7 @@ class Bot
 		$historyFile = $dataDirectory->child( 'history.json ');
 		$this->history = new History\History( $historyFile );
 
+		$this->dataDirectory = $dataDirectory;
 		$this->tempDirectory = $dataDirectory->childDir( 'tmp' );
 	}
 
@@ -65,8 +71,8 @@ class Bot
 		 */
 		$palettes = [];
 
-		$palettesURL = 'https://cabrera-bots.s3.amazonaws.com/tinyheavens/palettes.yml';
- 		$palettesYAML = file_get_contents( $palettesURL );
+		$palettesFile = $this->dataDirectory->child( 'palettes.yml' );
+ 		$palettesYAML = $palettesFile->getContents();
  		$palettesData = Spyc::YAMLLoadString( $palettesYAML );
 
  		foreach( $palettesData as $paletteData )
